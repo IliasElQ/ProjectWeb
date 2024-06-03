@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Informations Médicales</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('17172470546531694.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 80%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #293a4c;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: #273e57;
+            color: white;
+        }
+
+        .btn-custom {
+            background-color: #ff5733;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #c70039;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #213f60;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Informations des Opérations</h2>
+    <table id="operation" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Num_Operation</th>
+            <th>Type_Operation</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Salle</th>
+            <th>Anesthesie</th>
+            <th>Instruments</th>
+            <th>Nbr_infirmiers</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="operationTableBody">
+        <!-- Les informations de l'opération seront affichées ici -->
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Formulaire d'Opération</h2>
+    <form id="operationForm">
+        <div class="form-group">
+            <label for="Num_Operation" class="form-label">Num_Operation:</label>
+            <input type="text" class="form-control" name="Symptome" id="Num_Operation">
+        </div>
+        <div class="form-group">
+            <label for="Type_Operation" class="form-label">Type_Operation:</label>
+            <select id="Type_Operation" class="form-control" name="Type_Operation" required>
+                <option value="Chirurgie cardiaque">Chirurgie cardiaque</option>
+                <option value="Chirurgie orthopédique">Chirurgie orthopédique</option>
+                <option value="Chirurgie abdominale">Chirurgie abdominale</option>
+                <!-- Ajoutez d'autres types d'opérations au besoin -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Dateo" class="form-label">Date:</label>
+            <input type="date" id="Dateo" class="form-control" name="Date">
+        </div>
+        <div class="form-group">
+            <label for="Heure" class="form-label">Heure:</label>
+            <input type="time" id="Heure" class="form-control" name="Symptome">
+        </div>
+        <div class="form-group">
+            <label for="Salle" class="form-label">Salle:</label>
+            <input type="text" id="Salle" class="form-control" name="Hypertension_Arterielle">
+        </div>
+        <div class="form-group">
+            <label for="Anesthesie" class="form-label">Anesthesie:</label>
+            <select id="Anesthesie" class="form-control" name="Anesthesie" required>
+                <option value="Générale">Générale</option>
+                <option value="Locale">Locale</option>
+                <option value="Régionale">Régionale</option>
+                <!-- Ajoutez d'autres types d'anesthésie au besoin -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Instruments" class="form-label">Instruments:</label>
+            <select id="Instruments" class="form-control" name="Instruments" multiple required>
+                <option value="Scalpel">Scalpel</option>
+                <option value="Pince">Pince</option>
+                <option value="Ciseaux">Ciseaux</option>
+                <!-- Ajoutez d'autres instruments au besoin -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Nbr_infirmiers" class="form-label">Nbr infirmiers:</label>
+            <input type="number" id="Nbr_infirmiers" class="form-control" name="Symptome">
+        </div>
+        <button type="button" class="btn btn-custom" onclick="ajouterOperation()">Ajouter Consultation</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Consultations</h2>
+    <table id="NumC" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>N_Consul</th>
+            <th>Date</th>
+            <th>Symptome</th>
+            <th>Hypertension_Art</th>
+            <th>Diabete</th>
+            <th>Remarque</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="consultt">
+        </tbody>
+    </table>
+    <h2>Ajouter Consultation</h2>
+    <form id="NumConsultation">
+        <div class="form-group">
+            <label for="Num_Consultation" class="form-label">Nm Consul :</label>
+            <input type="text" class="form-control" id="Num_Consultation" name="Symptome">
+        </div>
+        <div class="form-group">
+            <label for="Date" class="form-label">Date :</label>
+            <input type="date" class="form-control" id="Date" name="Date">
+        </div>
+        <div class="form-group">
+            <label for="Symptome" class="form-label">Symptome :</label>
+            <input type="text" class="form-control" id="Symptome" name="Symptome">
+        </div>
+        <div class="form-group">
+            <label for="Hypertension_Arterielle" class="form-label">Hypertension_Arterielle :</label>
+            <input type="text" class="form-control" id="Hypertension_Arterielle" name="Hypertension_Arterielle">
+        </div>
+        <div class="form-group">
+            <label for="Diabete" class="form-label">Diabete:</label>
+            <input type="text" class="form-control" id="Diabete" name="Diabete">
+        </div>
+        <div class="form-group">
+            <label for="Remarque" class="form-label">Remarque:</label>
+            <input type="text" class="form-control" id="Remarque" name="Remarque">
+        </div>
+        <button type="button" class="btn btn-custom" onclick="ajouterConsultation()">Ajouter Consultation</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Graphes</h2>
+    <table id="NbrGraphe" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Nbr_Graphe</th>
+            <th>Date_Graph</th>
+            <th>PhotoGraphe</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="Graphh">
+        </tbody>
+    </table>
+    <h2>Ajouter Graphe</h2>
+    <form id="oi2">
+        <div class="form-group">
+            <label for="Nbr_Graphe" class="form-label">Nbr Graphe:</label>
+            <input type="text" class="form-control" id="Nbr_Graphe" name="Nombre Graphe">
+        </div>
+        <div class="form-group">
+            <label for="Date_Graph" class="form-label">Date:</label>
+            <input type="date" class="form-control" id="Date_Graph" name="Date_Graph">
+        </div>
+        <div class="form-group">
+            <label for="PhotoGraphe" class="form-label">Photographe:</label>
+            <input type="file" class="form-control" id="PhotoGraphe" name="PhotoGraphe" accept="image/*">
+        </div>
+        <button type="button" class="btn btn-custom" onclick="ajouterGraphe()">Ajouter Graphe</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>Analyses</h2>
+    <table id="analysesTable" class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Nbre_Analyse</th>
+            <th>Date_Analyse</th>
+            <th>Photo_Analyse</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="analyss">
+        </tbody>
+    </table>
+    <h2>Ajouter Analyse</h2>
+    <form id="analysesForm">
+        <div class="form-group">
+            <label for="Nbr" class="form-label">Nombre Analyse:</label>
+            <input type="text" class="form-control" id="Nbr" name="Nombre Analyse">
+        </div>
+        <div class="form-group">
+            <label for="Dateanalyse" class="form-label">Date:</label>
+            <input type="date" class="form-control" id="Dateanalyse" name="Date Graphe">
+        </div>
+        <div class="form-group">
+            <label for="Photo_analyse" class="form-label">Photo Analyse:</label>
+            <input type="file" class="form-control" id="Photo_analyse" name="Photo Analyse">
+        </div>
+        <button type="button" class="btn btn-custom" onclick="ajouterAnalyse()">Ajouter Analyse</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script1.js"></script>
+<script src="script123.js"></script>
+
+</body>
+
+</html>

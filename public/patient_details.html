@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page d'Informations Médicales</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f8ff;
+    }
+
+    #leftSection,
+    #rightSection {
+      padding: 30px;
+    }
+
+    #patientInfo {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #patientInfo img {
+      max-width: 100%;
+      max-height: 150px;
+      margin-bottom: 10px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+    }
+
+    table {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #dddddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .btn-custom {
+      background-color: #3498db;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #297fb8;
+    }
+
+    .deleteButton {
+      background-color: #dc3545;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .deleteButton:hover {
+      background-color: #c82333;
+    }
+
+    .section-card {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #ffffff;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      font-weight: bold;
+      color: #3498db;
+    }
+
+    .carre {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+    }
+
+    h2 {
+      color: #3498db;
+    }
+  </style>
+</head>
+
+<body class="d-flex flex-column">
+
+<div id="leftSection" class="container">
+  <div id="personDetails" class="section-card"></div>
+</div>
+
+<div id="rightSection" class="container">
+  <div class="section-card">
+    <h2>Consultations</h2>
+    <table class="table table-bordered" id="NumC">
+      <thead class="thead-light">
+      <tr>
+        <th>N° Consultation</th>
+        <th>Date</th>
+        <th>Symptôme</th>
+        <th>Hypertension Artérielle</th>
+        <th>Diabète</th>
+        <th>Remarque</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="consultt"></tbody>
+    </table>
+    <h2>Ajouter Consultation</h2>
+    <form id="NumConsultation" class="form-row">
+      <div class="form-group col-md-3">
+        <label for="Num_Consultation" class="form-label">N° Consultation :</label>
+        <input type="text" class="form-control" id="Num_Consultation" name="Symptome">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="Date" class="form-label">Date :</label>
+        <input type="date" class="form-control" id="Date" name="Date">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="Symptome" class="form-label">Symptôme :</label>
+        <input type="text" class="form-control" id="Symptome" name="Symptome">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="Hypertension_Arterielle" class="form-label">Hypertension Artérielle :</label>
+        <input type="text" class="form-control" id="Hypertension_Arterielle" name="Hypertension_Arterielle">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="Diabete" class="form-label">Diabète :</label>
+        <input type="text" class="form-control" id="Diabete" name="Diabete">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="Remarque" class="form-label">Remarque :</label>
+        <input type="text" class="form-control" id="Remarque" name="Remarque">
+      </div>
+      <div class="form-group col-md-12">
+        <button type="button" class="btn btn-custom" onclick="ajouterConsultation()">Ajouter Consultation</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="grapheSection" class="section-card">
+    <h2>Graphes</h2>
+    <table class="table table-bordered" id="NbrGraphe">
+      <thead class="thead-light">
+      <tr>
+        <th>N° Graphe</th>
+        <th>Date du Graph</th>
+        <th>Photo du Graph</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="Graphh"></tbody>
+    </table>
+    <h2>Ajouter Graphe</h2>
+    <form id="oi2" class="form-row">
+      <div class="form-group col-md-4">
+        <label for="Nbr_Graphe" class="form-label">N° Graphe :</label>
+        <input type="text" class="form-control" id="Nbr_Graphe" name="Nombre Graphe">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="Date_Graph" class="form-label">Date :</label>
+        <input type="date" class="form-control" id="Date_Graph" name="Date_Graph">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="PhotoGraphe" class="form-label">Photographe :</label>
+        <input type="file" class="form-control" id="PhotoGraphe" name="PhotoGraphe" accept="image/*">
+      </div>
+      <div class="form-group col-md-12">
+        <button type="button" class="btn btn-custom" onclick="ajouterGraphe()">Ajouter Graphe</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="analyseSection" class="section-card">
+    <h2>Analyses</h2>
+    <table class="table table-bordered" id="analysesTable">
+      <thead class="thead-light">
+      <tr>
+        <th>Nbre Analyse</th>
+        <th>Date Analyse</th>
+        <th>Photo Analyse</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody id="analyss"></tbody>
+    </table>
+    <h2>Ajouter Analyse</h2>
+    <form id="analysesForm" class="form-row">
+      <div class="form-group col-md-4">
+        <label for="Nbr" class="form-label">Nombre Analyse :</label>
+        <input type="text" class="form-control" id="Nbr" name="Nombre Analyse">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="Dateanalyse" class="form-label">Date :</label>
+        <input type="date" class="form-control" id="Dateanalyse" name="Date Graphe">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="Photo_analyse" class="form-label">Photo Analyse :</label>
+        <input type="file" class="form-control" id="Photo_analyse" name="Photo Analyse">
+      </div>
+      <div class="form-group col-md-12">
+        <button type="button" class="btn btn-custom" onclick="ajouterAnalyse()">Ajouter Analyse</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function fetchPersonDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nationalId = urlParams.get('nationalId');
+
+    if (!nationalId) {
+      console.error('Aucun identifiant national reçu');
+      return;
+    }
+
+    fetch(`/getUserDetails/${nationalId}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Erreur lors de la récupération des détails de la personne');
+              }
+              return response.json();
+            })
+            .then(personInfo => {
+              const personDetails = document.getElementById('personDetails');
+              const { national_id, first_name, last_name, age, gender, phone_number } = personInfo;
+              personDetails.innerHTML = `
+                    <h2>Détails de la personne</h2>
+                    <p>Identifiant national : ${national_id}</p>
+                    <p>Prénom : ${first_name}</p>
+                    <p>Nom : ${last_name}</p>
+                    <p>Âge : ${age}</p>
+                    <p>Numéro de téléphone : ${phone_number}</p>
+                    <p>Sexe : ${gender}</p>
+                `;
+            })
+            .catch(error => {
+              console.error('Erreur lors de la récupération des détails de la personne :', error);
+              const personDetails = document.getElementById('personDetails');
+              personDetails.innerHTML = 'Erreur lors de la récupération des détails de la personne';
+            });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fetchPersonDetails();
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script1.js"></script>
+
+</body>
+
+</html>
